@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.Scanner;
+
 /**
  * Created by user on 03/31/2017.
  */
@@ -31,7 +32,7 @@ public class ReadFile {
     while (in.hasNextLine()) {
       String[] currentLine = in.nextLine().trim().split("\\s+");
       for (int i = 0; i < currentLine.length; i++) {
-        matrix.setValue(lineCount,i,Integer.parseInt(currentLine[i]));
+        matrix.setValue(lineCount, i, Integer.parseInt(currentLine[i]));
       }
       lineCount++;
     }

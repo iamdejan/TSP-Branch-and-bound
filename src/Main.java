@@ -4,7 +4,7 @@
 public class Main {
   public static void main(String args[]) throws Exception {
     ReadFile reader = new ReadFile("matriks.txt");
-    Matrices matrix = reader.createMatrix();
-    System.out.print(matrix.toString());
+    BranchAndBound bbObj = new BranchAndBound(reader.createMatrix());
+    //System.out.print(matrix.toString());
   }
 }
