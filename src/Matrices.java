@@ -12,11 +12,22 @@ public class Matrices {
     cost = 0;
   }
 
+  public Matrices(Matrices srcMatrix) {
+    this.length = srcMatrix.getLength();
+    this.matrix = new int[length][length];
+    this.cost = srcMatrix.getCost();
+    for(int i = 0;i < length;i++) {
+      for(int j = 0;j < length;j++) {
+        this.matrix[i][j] = srcMatrix.getMatrices()[i][j];
+      }
+    }
+  }
+
   public String toString() {
     String strTemp = "";
     for (int i = 0; i < length; i++) {
       for (int j = 0; j < length; j++) {
-        strTemp += Integer.toString(matrix[i][j]) + " ";
+        strTemp += Integer.toString(matrix[i][j]) + "\t";
       }
       strTemp += "\n";
     }
