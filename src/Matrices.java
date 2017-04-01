@@ -1,5 +1,5 @@
 /**
- * Created by user on 03/31/2017.
+ * Created by Winarto on 03/31/2017.
  */
 public class Matrices {
   private int[][] matrix;

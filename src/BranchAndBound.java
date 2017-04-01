@@ -17,7 +17,6 @@ public class BranchAndBound {
     processedBranch.add(0);
     jumlahSimpul = 1;
     countReduceCostMatrix(matrix);
-    SolveTSP();
   }
 
   public void SolveTSP() {
@@ -43,12 +42,8 @@ public class BranchAndBound {
     travelCost = tempMatrix.getCost();
   }
 
-  public String getRoute() {
-    String tempStr = "";
-    for(int idx = 0;idx < processedBranch.size();idx++) {
-      tempStr += Integer.toString(processedBranch.get(idx)+1) + " ";
-    }
-    return tempStr;
+  public List<Integer> getRoute() {
+    return processedBranch;
   }
 
   public int getMinCost() {
