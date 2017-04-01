@@ -19,7 +19,7 @@ public class BranchAndBound {
     countReduceCostMatrix(matrix);
   }
 
-  public void SolveTSP() {
+  public void solveTSP() {
     Matrices tempMatrix = new Matrices(rcmMatrix);
     while(!getFinishStatus(tempMatrix)) {
       Matrices[] bufMatrix = new Matrices[tempMatrix.getLength()];

@@ -13,19 +13,26 @@ public class DrawGraph {
   private Node[] allNode;
   private Edge[][] allEdge;
   private List<Integer> solutionPath;
+  private boolean isDirected;
 
-  public DrawGraph(String graphName, Matrices inMatrix, List<Integer> path) {
+  public DrawGraph(String graphName, Matrices inMatrix, List<Integer> path, boolean directed) {
     matrix = inMatrix;
     matrixLength = inMatrix.getLength();
     allNode = new Node[matrixLength];
     allEdge = new Edge[matrixLength][matrixLength];
     solutionPath = path;
     mainGraph = new MultiGraph(graphName);
-    createGraph();
+    isDirected = directed;
+    if(directed) {
+      createDirectedGraph();
+    }else {
+      createNonDirectedGraph();
+    }
   }
 
   public void DisplayGraph() {
-    System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+    if(isDirected)
+      System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
     //allNode[0].addAttribute("ui.style" , ("size: 20px, 20px; fill-color: red; shape: rounded-box; stroke-mode: plain; stroke-color: yellow;"));
     /*allNode[0].setAttribute("label", "tes");
     allEdge[0][1].setAttribute("label","1.0");
@@ -35,7 +42,7 @@ public class DrawGraph {
     mainGraph.display();
   }
 
-  private void createGraph() {
+  private void createDirectedGraph() {
     for(int idx = 0;idx < matrixLength;idx++) {
       allNode[idx] = mainGraph.addNode(Integer.toString(idx));
       allNode[idx].setAttribute("label", Integer.toString(idx+1));
@@ -56,6 +63,33 @@ public class DrawGraph {
       int prev = solutionPath.get(idx-1);
       int next = solutionPath.get(idx);
       allEdge[prev][next].addAttribute("ui.style",("fill-color: red;"));
+    }
+  }
+
+  private void createNonDirectedGraph() {
+    for(int idx = 0;idx < matrixLength;idx++) {
+      allNode[idx] = mainGraph.addNode(Integer.toString(idx));
+      allNode[idx].setAttribute("label", Integer.toString(idx+1));
+      if(solutionPath.contains(idx)) {
+        allNode[idx].addAttribute("ui.style",("size:20px,20px;fill-color: red;"));
+      }
+    }
+    for(int row = 0;row < matrixLength;row++) {
+      for(int col = 0;col < row;col++) {
+        String edgeName = Integer.toString(row)+Integer.toString(col);
+        if(row != col) {
+          allEdge[row][col] = mainGraph.addEdge(edgeName, allNode[row], allNode[col], false);
+          allEdge[row][col].setAttribute("label",Integer.toString(matrix.getMatrices()[row][col]));
+        }
+      }
+    }
+    for(int idx = 1;idx < solutionPath.size();idx++){
+      int prev = solutionPath.get(idx-1);
+      int next = solutionPath.get(idx);
+      if(prev > next)
+        allEdge[prev][next].addAttribute("ui.style",("fill-color: red;"));
+      else
+        allEdge[next][prev].addAttribute("ui.style",("fill-color: red;"));
     }
   }
 }
