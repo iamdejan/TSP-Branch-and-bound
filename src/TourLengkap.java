@@ -48,6 +48,7 @@ public class TourLengkap {
             int prevBranch = processedBranch.get(idx).get(processedBranch.get(idx).size()-1);
             float branchCost = countMinCost(mainMatrix,prevBranch,jdx);
             if(branchCost < minCost) {
+             // System.out.println("cost: " + branchCost + " prev: " + prevBranch + " next: " + jdx);
               minCost = branchCost;
               minIdx = jdx;
             }
@@ -57,6 +58,7 @@ public class TourLengkap {
         solutionCost.set(idx, minCost);
       }
       processedBranch.get(idx).add(0);
+      solutionCost.set(idx, countFinalCost(processedBranch.get(idx)));
     }
   }
 
@@ -86,6 +88,14 @@ public class TourLengkap {
     }
     totalCost *= 0.5f;
     return totalCost;
+  }
+
+  private float countFinalCost(List<Integer> solutionList) {
+    float cost = 0f;
+    for(int idx = 0;idx < solutionList.size()-1;idx++) {
+      cost += mainMatrix.getMatrices()[solutionList.get(idx)][solutionList.get(idx+1)];
+    }
+    return cost;
   }
 
   private int getFirstMin(int[] numbers) {
@@ -129,7 +139,7 @@ public class TourLengkap {
     float min = 9999f;
     int minIdx = -1;
     for(int idx = 0;idx<solutionCost.size();idx++) {
-      if(solutionCost.get(idx) < min) {
+      if (solutionCost.get(idx) < min) {
         min = solutionCost.get(idx);
         minIdx = idx;
       }
