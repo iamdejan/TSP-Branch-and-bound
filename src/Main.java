@@ -20,7 +20,7 @@ public class Main {
 */
     long startTime = System.nanoTime();
     TourLengkap tour = new TourLengkap(mainMatrix);
-    tour.solveTSP();
+    //tour.solveTSP();
     long endTime = System.nanoTime();
     DrawGraph graph = new DrawGraph("TSP",mainMatrix,tour.getRoute(), false);
     System.out.println((double) (endTime - startTime)/1000000 + " ms");

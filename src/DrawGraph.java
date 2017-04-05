@@ -87,9 +87,9 @@ public class DrawGraph {
       int prev = solutionPath.get(idx-1);
       int next = solutionPath.get(idx);
       if(prev > next)
-        allEdge[prev][next].addAttribute("ui.style",("fill-color: red;"));
+        allEdge[prev][next].addAttribute("ui.style",("fill-color: red;stroke-mode:plain;stroke-color: yellow;"));
       else
-        allEdge[next][prev].addAttribute("ui.style",("fill-color: red;"));
+        allEdge[next][prev].addAttribute("ui.style",("fill-color: red;stroke-mode:plain;stroke-color: yellow;"));
     }
   }
 }
