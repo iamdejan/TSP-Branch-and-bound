@@ -4,14 +4,14 @@ import java.util.List;
 /**
  * Created by Winarto on 03/31/2017.
  */
-public class BranchAndBound {
+public class TSP_RCM {
   Matrices mainMatrix;
   Matrices rcmMatrix;
   List<Integer> processedBranch;
   int travelCost;
   int jumlahSimpul;
 
-  BranchAndBound(Matrices matrix) {
+  TSP_RCM(Matrices matrix) {
     mainMatrix = matrix;
     processedBranch = new ArrayList<>();
     processedBranch.add(0);
@@ -40,6 +40,10 @@ public class BranchAndBound {
     }
     processedBranch.add(0);
     travelCost = tempMatrix.getCost();
+  }
+
+  public int getJumlahSimpul() {
+    return jumlahSimpul;
   }
 
   public List<Integer> getRoute() {
